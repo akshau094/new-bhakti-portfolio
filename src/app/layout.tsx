@@ -29,7 +29,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-green-500/30`}
       >
         <ClientLayout>
-          <Navbar />
           {children}
         </ClientLayout>
       </body>

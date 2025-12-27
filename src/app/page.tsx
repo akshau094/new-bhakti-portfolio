@@ -5,6 +5,7 @@ import Hero from "@/components/sections/Hero";
 import Timeline from "@/components/sections/Timeline";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
+import Navbar from "@/components/ui/Navbar";
 
 export default function Home() {
   const [showPortfolio, setShowPortfolio] = useState(false);
@@ -28,6 +29,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-black animate-in fade-in duration-700">
+      <Navbar />
       <div className="mx-auto max-w-4xl px-4">
         <Hero />
         <Timeline />
