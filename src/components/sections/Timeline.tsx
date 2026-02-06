@@ -2,42 +2,65 @@
 
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
+import { X } from "lucide-react";
 
-const defaultExperiences = [
+type Experience = {
+  title: string;
+  subtitle: string;
+  period: string;
+  description: string[];
+  image?: string;
+  images?: string[];
+};
+
+const defaultExperiences: Experience[] = [
   {
-    title: "PERCEPTRA COMPANY LIMITED",
-    subtitle: "Junior Software Engineer (part-time)",
-    period: "Aug 2025 - Current",
+    title: "Softanic Solutions Pvt. Ltd.",
+    subtitle: "Full Stack Web Development Intern • Jalgaon, Maharashtra (On-site)",
+    period: "Jun 2024 - Jul 2024 · 2 mos (COMPLETED)",
     description: [
-      "Contributed to the development of an AI-assisted medical analysis platform designed to provide affordable PACS-like functionality for smaller hospitals and clinics, enabling improved medical imaging workflow.",
-      "Involved in full-stack development (frontend and backend), system design using Figma, requirements gathering, deployment, testing, and maintenance across multiple environments."
+      "Completed a 45-day intensive Full Stack Web Development internship, contributing to real-world production applications within a collaborative team.",
+      "Engineered responsive user interfaces using HTML, CSS, and JavaScript, ensuring high-quality performance across all devices.",
+      "Developed robust backend logic and RESTful APIs using Node.js and Express.js, integrated with MySQL database systems.",
+      "Mastered version control with Git and navigated Agile team workflows to deliver efficient software solutions.",
+      "Applied advanced problem-solving techniques to optimize web application performance and architectural scalability."
     ]
   }
 ];
 
-const defaultEducation = [
+const defaultEducation: Experience[] = [
   {
-    title: "Chulalongkorn University",
-    subtitle: "Bachelor of Engineering in Computer Engineering",
-    period: "Aug 2022 - Current (Expected 2026)",
+    title: "R. C. Patel Institute of Technology, Shirpur",
+    subtitle: "Bachelor of Technology - BTech, Computer Science (Data Science)",
+    period: "Aug 2025 – Mar 2028",
+    images: ["/main image/rcpit.jpg", "/main image/rcpit1.jpg"],
     description: [
-      "Studying core topics in computer engineering including programming, data structures, algorithms, computer architecture, and networks."
+      "Pursuing a specialized Bachelor of Technology in Computer Science with a focus on Data Science, maintaining a strong academic record and a proactive approach to emerging technologies.",
+      "Developing expertise in Machine Learning, Artificial Intelligence, and Big Data Analytics through rigorous coursework and hands-on laboratory projects.",
+      "Building robust foundational knowledge in Data Structures, Algorithms, and Database Management Systems to solve complex computational problems.",
+      "Actively engaged in developing scalable software solutions and predictive models using modern frameworks and programming languages.",
+      "Skills: Web Development, Python, Data Analytics, Machine Learning, AI"
+    ]
+  },
+  {
+    title: "Govt. Polytechnic College, Jalgaon",
+    subtitle: "Diploma in Computer Engineering (First Class with Distinction)",
+    period: "Jan 2022 – May 2025 (COMPLETED)",
+    images: ["/main image/gpj.jpg", "/main image/gpj1.jpg"],
+    description: [
+      "Successfully completed a three-year Diploma in Computer Engineering, securing an impressive First Class with Distinction.",
+      "Gained a comprehensive understanding of core engineering principles, including Operating Systems, Computer Networks, and Software Engineering.",
+      "Developed proficiency in multiple programming paradigms, including Object-Oriented Programming (Java/C++) and Web Technologies.",
+      "Participated in various technical workshops and academic projects, demonstrating strong problem-solving capabilities and technical aptitude.",
+      "Skills: Web Development, Android Development, Java, PHP, Networking"
     ]
   }
 ];
 
 export default function Timeline() {
   const [activeTab, setActiveTab] = useState<"work" | "education">("work");
-  const [experiences, setExperiences] = useState(defaultExperiences);
-  const [education, setEducation] = useState(defaultEducation);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const savedWork = localStorage.getItem("portfolio_work");
-    const savedEducation = localStorage.getItem("portfolio_education");
-    if (savedWork) setExperiences(JSON.parse(savedWork));
-    if (savedEducation) setEducation(JSON.parse(savedEducation));
-  }, []);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -50,7 +73,7 @@ export default function Timeline() {
     restDelta: 0.001
   });
 
-  const data = activeTab === "work" ? experiences : education;
+  const data = activeTab === "work" ? defaultExperiences : defaultEducation;
 
   return (
     <section id="experience" className="py-20 overflow-hidden" ref={containerRef}>
@@ -93,7 +116,7 @@ export default function Timeline() {
 
         <div className="relative">
           {/* Static Background Line */}
-          <div className="absolute left-[3px] top-2 bottom-2 w-[1px] bg-zinc-100 dark:bg-zinc-900 md:left-[163px]" />
+          <div className="absolute left-[3px] top-2 bottom-2 w-[1px] bg-zinc-100 dark:bg-zinc-900 md:left-[183px]" />
           
           {/* Animated Progress Line */}
           <motion.div
@@ -134,20 +157,54 @@ export default function Timeline() {
                   </div>
 
                   {/* Content */}
-                  <div className="pl-6 md:pl-0">
-                    <h3 className="text-sm font-bold uppercase tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-500 transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
-                      {item.subtitle}
-                    </p>
-                    <ul className="mt-3 space-y-2">
-                      {item.description.map((desc, i) => (
-                        <li key={i} className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                          {desc}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="pl-6 md:pl-0 flex flex-col md:flex-row gap-6">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-bold uppercase tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-500 transition-colors duration-300">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
+                        {item.subtitle}
+                      </p>
+                      <ul className="mt-3 space-y-2">
+                        {item.description.map((desc, i) => (
+                          <li key={i} className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                            {desc}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    {(item.image || item.images) && (
+                      <div className="flex flex-col gap-4 self-start">
+                        {item.images ? (
+                          item.images.map((img, imgIdx) => (
+                            <motion.div 
+                              key={imgIdx} 
+                              layoutId={`img-${img}`}
+                              onClick={() => setSelectedImage(img)}
+                              className="relative w-full md:w-32 aspect-[4/3] rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 cursor-zoom-in"
+                            >
+                              <img 
+                                src={img} 
+                                alt={`${item.title} ${imgIdx + 1}`}
+                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                              />
+                            </motion.div>
+                          ))
+                        ) : (
+                          <motion.div 
+                            layoutId={`img-${item.image}`}
+                            onClick={() => setSelectedImage(item.image!)}
+                            className="relative w-full md:w-32 aspect-[4/3] rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 cursor-zoom-in"
+                          >
+                            <img 
+                              src={item.image} 
+                              alt={item.title}
+                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            />
+                          </motion.div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}
@@ -155,6 +212,44 @@ export default function Timeline() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Image Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-10"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.button
+              initial={{ scale: 0, rotate: -90 }}
+              animate={{ scale: 1, rotate: 0 }}
+              exit={{ scale: 0, rotate: 90 }}
+              className="absolute top-6 right-6 z-[110] rounded-full bg-white/10 p-3 text-white backdrop-blur-md transition-colors hover:bg-white/20"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              <X className="h-6 w-6" />
+            </motion.button>
+
+            <motion.div
+              layoutId={`img-${selectedImage}`}
+              className="relative max-h-full max-w-full overflow-hidden rounded-2xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage}
+                alt="Full screen view"
+                className="h-auto max-h-[90vh] w-auto max-w-full object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

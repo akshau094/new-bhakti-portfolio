@@ -54,53 +54,15 @@ export default function Hero() {
               functional, and user-centered digital experiences.
             </motion.p>
               
-              <div className="relative inline-flex items-center rounded-2xl border border-white/40 bg-white/5 p-1 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] dark:border-white/10 dark:bg-white/5">
-              <button
-                onClick={(e) => handleTabClick("resume", e)}
-                className={`relative z-10 px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest transition-all duration-500 ${
-                  activeTab === "resume" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 hover:text-green-500 hover:scale-105"
-                }`}
-              >
-                {activeTab === "resume" && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 -z-10 rounded-xl bg-white/60 shadow-[0_4px_12px_0_rgba(34,197,94,0.2)] backdrop-blur-md dark:bg-zinc-100/10"
-                    transition={{ type: "spring", stiffness: 350, damping: 35 }}
-                  />
-                )}
-                Resume
-              </button>
-              <button
-                onClick={(e) => handleTabClick("work", e)}
-                className={`relative z-10 px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest transition-all duration-500 ${
-                  activeTab === "work" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 hover:text-green-500 hover:scale-105"
-                }`}
-              >
-                {activeTab === "work" && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 -z-10 rounded-xl bg-white/60 shadow-[0_4px_12px_0_rgba(34,197,94,0.2)] backdrop-blur-md dark:bg-zinc-100/10"
-                    transition={{ type: "spring", stiffness: 350, damping: 35 }}
-                  />
-                )}
-                Work
-              </button>
-              <button
-                onClick={(e) => handleTabClick("education", e)}
-                className={`relative z-10 px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest transition-all duration-500 ${
-                  activeTab === "education" ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 hover:text-green-500 hover:scale-105"
-                }`}
-              >
-                {activeTab === "education" && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 -z-10 rounded-xl bg-white/60 shadow-[0_4px_12px_0_rgba(34,197,94,0.2)] backdrop-blur-md dark:bg-zinc-100/10"
-                    transition={{ type: "spring", stiffness: 350, damping: 35 }}
-                  />
-                )}
-                Education
-              </button>
-            </div>
+              {/* Only Resume button in glass container */}
+               <div className="relative inline-flex items-center rounded-2xl border border-white/40 bg-white/5 p-1 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] dark:border-white/10 dark:bg-white/5">
+                 <button
+                   onClick={() => window.open('https://my-resumeb24.netlify.app/', '_blank')}
+                   className="relative z-10 px-8 py-2.5 text-[11px] font-bold uppercase tracking-widest text-zinc-500 hover:text-green-500 hover:scale-105 transition-all duration-500"
+                 >
+                   Resume
+                 </button>
+               </div>
             </motion.div>
           </div>
 
