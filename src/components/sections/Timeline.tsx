@@ -18,7 +18,7 @@ const defaultExperiences: Experience[] = [
     title: "Softanic Solutions Pvt. Ltd.",
     subtitle: "Full Stack Web Development Intern • Jalgaon, Maharashtra (On-site)",
     period: "Jun 2024 - Jul 2024 · 2 mos (COMPLETED)",
-    images: ["/main image/cer.png", "/main image/offer.png"],
+    images: ["/main image/cer.png?v=2", "/main image/offer.png?v=2"],
     description: [
       "Completed a 45-day intensive Full Stack Web Development internship, contributing to real-world production applications within a collaborative team.",
       "Engineered responsive user interfaces using HTML, CSS, and JavaScript, ensuring high-quality performance across all devices.",
